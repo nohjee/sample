@@ -35,5 +35,12 @@ namespace sample.Controllers
 			return data;
 		}
 
+	    [HttpGet]
+	    public String TestParam(String val1, String val2)
+	    {
+	        String data = val1 + "/" +val2;
+	        return data;
+	    }
+
 	}
 }
