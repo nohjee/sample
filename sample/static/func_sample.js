@@ -19,23 +19,39 @@
 	}
 
     //	bonusCheck();
-    $('#btnOk').click(function() {
+	$('#btnOk').click(function () {
 
-        val1 = document.TestParameter.value1.value;
-        val2 = document.TestParameter.value2.value;
+	    var table = document.getElementById('valueTable');
+	    var row_len = table.rows.length;
 
-        $.ajax({
-            type: 'GET',
-            url: '/HOME/TestParam',
-            data : {
-                val1: val1, val2: val2
-            },
-            success: function(data) {
-                result = data.split('/');
-                document.TestParameter.value1_1.value = result[0];
-                document.TestParameter.value2_1.value = result[1];
-            }
-        });
-    });
+	    var inval = new Array();
+
+	    for (var i = 1; i <= row_len; i++) {
+	        var temp = document.getElementById('in_val' + [i]);
+	        inval[i - 1] = temp.value;
+	    }
+
+	    $.ajax({
+	        type: 'POST',
+	        url: '/HOME/TestParam',
+	        data: {
+	            inval1: inval[0], inval2: inval[1], inval3: inval[2], inval4: inval[3], inval5: inval[4]
+	        },
+
+	        success: function (data) {
+	            data = JSON.parse(data);
+	            var number = 1;
+
+	            for (key in data) {
+	                temp = document.getElementById('output_val' + number);
+	                temp.value = data[key];
+	                number++;
+                }
+	        },
+	        error: function (xhr, status, error) {
+	            console.log('error : ' + error);
+	        }
+	    });
+	});
 
 });
