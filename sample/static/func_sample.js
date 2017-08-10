@@ -21,37 +21,46 @@
     //	bonusCheck();
 	$('#btnOk').click(function () {
 
-	    var table = document.getElementById('valueTable');
-	    var row_len = table.rows.length;
-
-	    var inval = new Array();
-
-	    for (var i = 1; i <= row_len; i++) {
-	        var temp = document.getElementById('in_val' + [i]);
-	        inval[i - 1] = temp.value;
-	    }
-
+	    var id = document.getElementById('id').value;
+	    var name = document.getElementById('name').value;
+	    var email = document.getElementById('email').value;
+	    var address = document.getElementById('address').value;
+	    var phone = document.getElementById('phone').value;
+      
 	    $.ajax({
 	        type: 'POST',
 	        url: '/HOME/TestParam',
 	        data: {
-	            inval1: inval[0], inval2: inval[1], inval3: inval[2], inval4: inval[3], inval5: inval[4]
+	            id : id , name : name , email : email , address : address , phone : phone
 	        },
 
 	        success: function (data) {
 	            data = JSON.parse(data);
-	            var number = 1;
-
 	            for (key in data) {
-	                temp = document.getElementById('output_val' + number);
+	                var temp = document.getElementById('return_' + key.toLowerCase());
 	                temp.value = data[key];
-	                number++;
-                }
+	            }
+	           
 	        },
 	        error: function (xhr, status, error) {
 	            console.log('error : ' + error);
 	        }
 	    });
 	});
+
+/*
+	function emptyCheck(value) {
+        if (value == '' ||
+            value == null ||
+            value == undefined ||
+            (value != null && typeof value == 'object' && !Object.keys(value).length)) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+*/
+
+    
 
 });
