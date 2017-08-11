@@ -37,31 +37,35 @@ namespace sample.Controllers
 		}
 
         [HttpPost]
-        public String TestParam(String inval1, String inval2, String inval3, String inval4, String inval5)
+        public String TestParam(String id, String name, String email, String address, String phone)
         {
-            
+            //
             sampleClass sC = new sampleClass();
 
-            sC.Input1 = inval1;
-            sC.Input2 = inval2;
-            sC.Input3 = inval3;
-            sC.Input4 = inval4;
-            sC.Input5 = inval5;
+            sC.Id = Convert.ToInt32(id);
+            sC.Name = name;
+            sC.Email = email;
+            sC.Address = address;
+            sC.Phone = phone;
+            sC.Date = DateTime.Now.ToLongDateString();
+
 
             JavaScriptSerializer json_par = new JavaScriptSerializer();
             string obj = json_par.Serialize(sC);
             return obj;
+
         }
 
     }
 
-    public class sampleClass
-    {
-        public String Input1 { get; set; }
-        public String Input2 { get; set; }
-        public String Input3 { get; set; }
-        public String Input4 { get; set; }
-        public String Input5 { get; set; }
+        public class sampleClass
+        {
+            public int Id { get; set; }
+            public String Name { get; set; }
+            public String Email { get; set; }
+            public String Address { get; set; }
+            public String Phone { get; set; }
+            public String Date { get; set; }
 
-    }
+        }
 }
