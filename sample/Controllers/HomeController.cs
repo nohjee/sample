@@ -39,10 +39,9 @@ namespace sample.Controllers
         [HttpPost]
         public String TestParam(String id, String name, String email, String address, String phone)
         {
-            //
-            sampleClass sC = new sampleClass();
+            PersonalInfo sC = new PersonalInfo();
 
-            sC.Id = Convert.ToInt32(id);
+            sC.Id = Int16.Parse(id);
             sC.Name = name;
             sC.Email = email;
             sC.Address = address;
@@ -58,7 +57,7 @@ namespace sample.Controllers
 
     }
 
-        public class sampleClass
+        public class PersonalInfo
         {
             public int Id { get; set; }
             public String Name { get; set; }
