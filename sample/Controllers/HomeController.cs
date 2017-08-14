@@ -37,31 +37,37 @@ namespace sample.Controllers
 		}
 
         [HttpPost]
-        public String TestParam(String inval1, String inval2, String inval3, String inval4, String inval5)
+        public String TestParam(String[] idArr, String[] nameArr, String[] emailArr)
         {
+            List<ValueReturn> list_vr = new List<ValueReturn>();
+            for (int i = 0; i < idArr.Length; i++)
+            {
+                int id = Int32.Parse(idArr[i]);
+                ValueReturn vr = new ValueReturn(id,nameArr[i],emailArr[i]);
+                list_vr.Add(vr);
+            }
             
-            sampleClass sC = new sampleClass();
+             JavaScriptSerializer json_par = new JavaScriptSerializer();
+              string obj = json_par.Serialize(list_vr);
 
-            sC.Input1 = inval1;
-            sC.Input2 = inval2;
-            sC.Input3 = inval3;
-            sC.Input4 = inval4;
-            sC.Input5 = inval5;
 
-            JavaScriptSerializer json_par = new JavaScriptSerializer();
-            string obj = json_par.Serialize(sC);
             return obj;
         }
 
     }
 
-    public class sampleClass
+    public class ValueReturn
     {
-        public String Input1 { get; set; }
-        public String Input2 { get; set; }
-        public String Input3 { get; set; }
-        public String Input4 { get; set; }
-        public String Input5 { get; set; }
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public String Email { get; set; }
+
+        public ValueReturn(int Id, String Name, String Email)
+        {
+            this.Id = Id;
+            this.Name = Name;
+            this.Email = Email;
+        }
 
     }
 }
