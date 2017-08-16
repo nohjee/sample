@@ -11,8 +11,13 @@
     425.555.0100
 </address>
 <form name="TestParameter">
-    <input type="button" id="btnOk" value="Click"/>
-    <table id="valueTable" style="border: 1px solid black">
+    <p>
+        입력할 데이터 :
+        <input id="fieldCreate" type="number" />
+        <input type="button" id="DataInput" value="필드만들기" disabled="true"/>
+    </p>
+    
+    <table id="valueTable" style="border: 1px solid black; width: 500px">
         <thead>
         <tr>
             <td>구분</td>
@@ -20,62 +25,9 @@
             <td>결과 값</td>
         </tr>
         </thead>
-        <tr>
-            <td>아이디</td>
-            <td><input type="number" name="id" maxlength="10"/></td>
-            <td><input name="return_id" disabled="true"/></td>
-        </tr>
-        <tr>
-            <td>이름</td>
-            <td><input name="name"/></td>
-            <td><input name="return_name" disabled="true"/></td>
-        </tr>
-        <tr>
-            <td>이메일</td>
-            <td><input name="email"/></td>
-            <td><input name="return_email" disabled="true"/></td>
-        </tr>
-        <tr>
-            <tr>
-                <td></td>
-            </tr>
-        </tr>
-        <tr>
-            <td>아이디</td>
-            <td><input type="number" name="id" maxlength="10"/></td>
-            <td><input name="return_id" disabled="true"/></td>
-        </tr>
-        <tr>
-            <td>이름</td>
-            <td><input name="name"/></td>
-            <td><input name="return_name" disabled="true"/></td>
-        </tr>
-        <tr>
-            <td>이메일</td>
-            <td><input name="email"/></td>
-            <td><input name="return_email" disabled="true"/></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-
-
-        <tr>
-            <td>아이디</td>
-            <td><input type="number" name="id" maxlength="10"/></td>
-            <td><input name="return_id" disabled="true"/></td>
-        </tr>
-        <tr>
-            <td>이름</td>
-            <td><input name="name"/></td>
-            <td><input name="return_name" disabled="true"/></td>
-        </tr>
-        <tr>
-            <td>이메일</td>
-            <td><input name="email"/></td>
-            <td><input name="return_email" disabled="true"/></td>
-        </tr>
+        
     </table>
+    <input type="button" id="btnOk" value="값 입력" />
 </form>
 <address>
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
