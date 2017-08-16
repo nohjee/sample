@@ -41,15 +41,15 @@ namespace sample.Controllers
         public String TestParam(int[] idArr, String[] nameArr, String[] emailArr)
         {
             GetListClass listClass = new GetListClass();
-            listClass.Gvr = new List<GetValueReturn>(); 
+            listClass.ListInfoValue = new List<GetValueReturn>(); 
 
             for (int i = 0; i < idArr.Length; i++)
             {
                 GetValueReturn vr = new GetValueReturn(idArr[i],nameArr[i],emailArr[i]);  
-                listClass.Gvr.Add(vr);
+                listClass.ListInfoValue.Add(vr);
             } 
              JavaScriptSerializer json_par = new JavaScriptSerializer();
-              string obj = json_par.Serialize(listClass.Gvr);
+              string obj = json_par.Serialize(listClass.ListInfoValue);
 
 
             return obj;
@@ -74,6 +74,6 @@ namespace sample.Controllers
 
     public class GetListClass
     {
-        public List<GetValueReturn> Gvr { get; set; }
+        public List<GetValueReturn> ListInfoValue { get; set; }
     }
 }
