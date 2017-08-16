@@ -40,15 +40,16 @@ namespace sample.Controllers
         [HttpPost]
         public String TestParam(int[] idArr, String[] nameArr, String[] emailArr)
         {
-            List<GetValueReturn> list_vr = new List<GetValueReturn>();
+            GetListClass listClass = new GetListClass();
+            listClass.Gvr = new List<GetValueReturn>(); 
+
             for (int i = 0; i < idArr.Length; i++)
             {
-                GetValueReturn vr = new GetValueReturn(idArr[i],nameArr[i],emailArr[i]);
-                list_vr.Add(vr);
-            }
-            
+                GetValueReturn vr = new GetValueReturn(idArr[i],nameArr[i],emailArr[i]);  
+                listClass.Gvr.Add(vr);
+            } 
              JavaScriptSerializer json_par = new JavaScriptSerializer();
-              string obj = json_par.Serialize(list_vr);
+              string obj = json_par.Serialize(listClass.Gvr);
 
 
             return obj;
@@ -69,5 +70,10 @@ namespace sample.Controllers
             this.Email = Email;
         }
 
+    }
+
+    public class GetListClass
+    {
+        public List<GetValueReturn> Gvr { get; set; }
     }
 }
