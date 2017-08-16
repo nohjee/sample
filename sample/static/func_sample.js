@@ -18,49 +18,34 @@
 		});
 	}
 
-    $('#fieldCreate').keyup(function() {
-        var check = $('#fieldCreate').val();
-        if (check.length > 1) {
-            $(this).val(check.slice(0, 1));
-        }
-        if (check.length > 0) {
-            $('#DataInput').attr('disabled', false);
-        } else {
-            $('#DataInput').attr('disabled', true);
-        }
-        
-    });
 
-    $('#DataInput').click(function() {
-        var count = $('#fieldCreate').val();
 
-        for (var i = 0; i < count; i++) {
-            var row = '<tr>';
-            row += '<td>아이디</td>';
-            row += '<td><input type="number" name="id" maxlength="10"/></td>';
-            row += '<td><input name="return_id" disabled="true"/></td>';
-            row += '</tr><tr><td></td></tr><tr>';   
-            row += ' <td>이름</td>';
-            row += ' <td><input name="name"/></td>';
-            row += ' <td><input name="return_name" disabled="true"/></td>';
-            row += '</tr><tr><td></td></tr><tr>';
+    
+
+    for (var i = 0; i < 3; i++) {
+        var row = '<tr>';
+        row += '<td>아이디</td>';
+        row += '<td><input type="number" name="id" maxlength="10"/></td>';
+        row += '<td><input name="return_id" disabled="true"/></td>';
+        row += '</tr><tr><td></td></tr><tr>';   
+        row += ' <td>이름</td>';
+        row += ' <td><input name="name"/></td>';
+        row += ' <td><input name="return_name" disabled="true"/></td>';
+        row += '</tr><tr><td></td></tr><tr>';
            
-            row += '<td>이메일</td>';
-            row += ' <td><input name="email"/></td>';
-            row += '<td><input name="return_email" disabled="true"/></td>';
-            row += '</tr>';
-            $('#valueTable').append(row);
-        }
+        row += '<td>이메일</td>';
+        row += ' <td><input name="email"/></td>';
+        row += '<td><input name="return_email" disabled="true"/></td>';
+        row += '</tr>';
+        $('#valueTable').append(row);
+    }
 
-    });
+
 
     //	bonusCheck();
     $('#btnOk').click(function () {
 
-	    var inCount = $('#fieldCreate').val();
-	    if (inCount == '') {
-	        return;
-	    }
+	 
 	    var id_len = $('input[name=id]');
 	    var id = new Array();
 	    var name = new Array();
@@ -81,8 +66,7 @@
 	   
 	    $.ajax({
 	        type: 'POST',
-	        url: '/HOME/TestParam',
-	        traditional: true,   
+	        url: '/HOME/TestParam',      
 	        data: {
 	            idArr: id, nameArr: name, emailArr: email
 	        },

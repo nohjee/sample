@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Web.WebPages;
 using sample.Common;
 
 namespace sample.Controllers
@@ -39,11 +40,12 @@ namespace sample.Controllers
         [HttpPost]
         public String TestParam(String[] idArr, String[] nameArr, String[] emailArr)
         {
-            List<ValueReturn> list_vr = new List<ValueReturn>();
+            List<GetValueReturn> list_vr = new List<GetValueReturn>();
             for (int i = 0; i < idArr.Length; i++)
             {
-                int id = Int32.Parse(idArr[i]);
-                ValueReturn vr = new ValueReturn(id,nameArr[i],emailArr[i]);
+                
+                int id = idArr[i].AsInt();
+                GetValueReturn vr = new GetValueReturn(id,nameArr[i],emailArr[i]);
                 list_vr.Add(vr);
             }
             
@@ -56,13 +58,13 @@ namespace sample.Controllers
 
     }
 
-    public class ValueReturn
+    public class GetValueReturn
     {
         public int Id { get; set; }
         public String Name { get; set; }
         public String Email { get; set; }
 
-        public ValueReturn(int Id, String Name, String Email)
+        public GetValueReturn(int Id, String Name, String Email)
         {
             this.Id = Id;
             this.Name = Name;
