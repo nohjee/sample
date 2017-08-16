@@ -8,7 +8,7 @@
 			data: {
 				BonusCode: 'test-nohjee'
 			},
-			url: '/Home/GetBonusCheck',
+			url: '/PersonalInfo/GetBonusCheck',
 			success: function (data) {
 				console.log('SuccessCode: ' + data);
 			},
@@ -18,40 +18,56 @@
 		});
 	}
 
+	
+
+
+
     //	bonusCheck();
-	$('#btnOk').click(function () {
+    $('#btnOk').click(function () {
 
-	    var table = document.getElementById('valueTable');
-	    var row_len = table.rows.length;
+       
+            id = $.trim($('input[name=Id]').val());
+            name = $.trim($('input[name=Name]').val());
+            email = $.trim($('input[name=Email]').val());
+            address = $.trim($('input[name=Address]').val());
+            phone = $.trim($('input[name=Phone]').val());
 
-	    var inval = new Array();
 
-	    for (var i = 1; i <= row_len; i++) {
-	        var temp = document.getElementById('in_val' + [i]);
-	        inval[i - 1] = temp.value;
-	    }
+            if (id == '' || name == '' || email== '' || address =='' || phone =='') {
+                window.alert('모든 문항을 입력해주세요.');
+                return;
+            }
 
-	    $.ajax({
-	        type: 'POST',
-	        url: '/HOME/TestParam',
-	        data: {
-	            inval1: inval[0], inval2: inval[1], inval3: inval[2], inval4: inval[3], inval5: inval[4]
-	        },
+ 
+            $.ajax({
+                type: 'POST',
+                url: '/PersonalInfo/TestDTO',
+                data: {
+                    Id: id, Name: name, Email: email, Address: address, Phone: phone
+                },
+            success: function (data) {
 
-	        success: function (data) {
-	            data = JSON.parse(data);
-	            var number = 1;
+                data = JSON.parse(data);
+                console.log(data);
+               for (key in data) {
+                   $('#return_' + key.toLowerCase()).html(data[key]);
+               }
 
-	            for (key in data) {
-	                temp = document.getElementById('output_val' + number);
-	                temp.value = data[key];
-	                number++;
-                }
-	        },
-	        error: function (xhr, status, error) {
-	            console.log('error : ' + error);
-	        }
-	    });
-	});
+            },
+            error: function (xhr, status, error) {
+                console.log('error : ' + error);
+            }
+        });
+    });
+
+    $('input[name=Id]').keyup(function () {
+        var id = $(this).val();
+        var maxLen = $(this).attr('maxLength');
+        if (id.length > maxLen.length) {
+            $(this).val(id.slice(0, maxLen));
+        }
+    });
+
+
 
 });
