@@ -38,14 +38,12 @@ namespace sample.Controllers
 		}
 
         [HttpPost]
-        public String TestParam(String[] idArr, String[] nameArr, String[] emailArr)
+        public String TestParam(int[] idArr, String[] nameArr, String[] emailArr)
         {
             List<GetValueReturn> list_vr = new List<GetValueReturn>();
             for (int i = 0; i < idArr.Length; i++)
             {
-                
-                int id = idArr[i].AsInt();
-                GetValueReturn vr = new GetValueReturn(id,nameArr[i],emailArr[i]);
+                GetValueReturn vr = new GetValueReturn(idArr[i],nameArr[i],emailArr[i]);
                 list_vr.Add(vr);
             }
             
