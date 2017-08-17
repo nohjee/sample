@@ -11,23 +11,21 @@ namespace sample.Class_process
     {
         public String SetInfoData(int createId)
         {
+            InData indata = new InData();
             ListInfo listinfo = new ListInfo();
-            listinfo.Personalinfo = new List<PersonalInfo>();
+            listinfo.Personalinfo = new List<PersonalInfoModels>();
 
             Random random = new Random();
 
-            String[] nameArr = {"Kim","Lee","Park","Nam","Gang","Woo","Choe"};
-            String[] emailArr = {"@naver.com", "@gmail.com", "@nate.com", "daum.net", "nsuslab.com"};
-            String[] addrArr = {"서울", "수원", "인천", "대구", "광주", "대전", "부산", "울산"};
-
+            
             for (int i = 0; i < createId; i++)
             {
-               PersonalInfo info = new PersonalInfo();
+               PersonalInfoModels info = new PersonalInfoModels();
                 info.Id = random.Next(001,100);
                 info.Phone = "010"+random.Next(00000000, 99999999).ToString();
-                info.Name = nameArr[random.Next(0, nameArr.Length-1)];
-                info.Email = info.Name + emailArr[random.Next(0, emailArr.Length - 1)];
-                info.Address = addrArr[random.Next(0, addrArr.Length - 1)];
+                info.Name = indata.NameArr[random.Next(0, indata.NameArr.Length-1)];
+                info.Email = info.Name + indata.EmailArr[random.Next(0, indata.EmailArr.Length - 1)];
+                info.Address = indata.AddrArr[random.Next(0, indata.AddrArr.Length - 1)];
                 info.NowDate = DateTime.Now.ToLongDateString();
                 listinfo.Personalinfo.Add(info);
             }
@@ -38,8 +36,5 @@ namespace sample.Class_process
         }
     }
 
-    public class ListInfo {
-    
-        public List<PersonalInfo> Personalinfo { get; set; }
-    }
+   
 }

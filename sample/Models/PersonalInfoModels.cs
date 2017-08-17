@@ -5,7 +5,7 @@ using System.Web;
 
 namespace sample.Models
 {
-    public class PersonalInfo
+    public class PersonalInfoModels
     {
         public int Id { get; set; }
         public String Name { get; set; }
