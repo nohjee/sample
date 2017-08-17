@@ -8,7 +8,7 @@
 			data: {
 				BonusCode: 'test-nohjee'
 			},
-			url: '/Home/GetBonusCheck',
+			url: '/PersonalInfo/GetBonusCheck',
 			success: function (data) {
 				console.log('SuccessCode: ' + data);
 			},
@@ -18,40 +18,81 @@
 		});
 	}
 
+	
+
+
+
     //	bonusCheck();
-	$('#btnOk').click(function () {
+    $('#btnOk').click(function () {
 
-	    var table = document.getElementById('valueTable');
-	    var row_len = table.rows.length;
 
-	    var inval = new Array();
+        var id = $('#createId').val();
+        $('#valueTable>tbody').remove();
 
-	    for (var i = 1; i <= row_len; i++) {
-	        var temp = document.getElementById('in_val' + [i]);
-	        inval[i - 1] = temp.value;
-	    }
 
-	    $.ajax({
-	        type: 'POST',
-	        url: '/HOME/TestParam',
-	        data: {
-	            inval1: inval[0], inval2: inval[1], inval3: inval[2], inval4: inval[3], inval5: inval[4]
-	        },
+            if (id == '') {
+                window.alert('값을 입력해주세요');
+                return;
+            }
 
-	        success: function (data) {
-	            data = JSON.parse(data);
-	            var number = 1;
+ 
+            $.ajax({
+                type: 'POST',
+                url: '/PersonalInfo/TestDTO',
+                data: {
+                    createId: id
+                },
+            success: function (data) {
 
-	            for (key in data) {
-	                temp = document.getElementById('output_val' + number);
-	                temp.value = data[key];
-	                number++;
+                data = JSON.parse(data);
+                
+                for (var i=0; i<data.length; i++) {
+                    var row = '<tr>';
+                    row += '<td>아이디</td>';
+                    row += '<td>'+data[i].Id+'</td>';
+                    row += '</tr><tr>';
+
+                    row += ' <td>이름</td>';
+                    row += ' <td>'+data[i].Name+'</td>';
+                    row += '</tr><tr>';
+
+                    row += '<td>이메일</td>';
+                    row += '<td>' + data[i].Email + '</td>';
+                    row += '</tr><tr>';
+
+                    row += '<td>주소</td>';
+                    row += '<td>' + data[i].Address + '</td>';
+                    row += '</tr><tr>';
+
+                    row += '<td>전화번호</td>';
+                    row += '<td>' + data[i].Phone + '</td>';
+                    row += '</tr><tr>';
+
+                    row += '<td style="border-bottom: 1px solid black;">현재 날짜</td>';
+                    row += '<td style="border-bottom: 1px solid black;">' + data[i].NowDate + '</td>';
+                    row += '</tr>';
+
+                    $('#valueTable').append(row);
                 }
-	        },
-	        error: function (xhr, status, error) {
-	            console.log('error : ' + error);
-	        }
-	    });
-	});
+
+            },
+            error: function (xhr, status, error) {
+                console.log('error : ' + error);
+            }
+        });
+    });
+
+    $('#createId').keyup(function () {
+        
+        var id = $('#createId').val();
+        var max = $('#createId').attr('max');
+        id = parseInt(id);
+        max = parseInt(max);
+        if (id > max) {
+            $('#createId').val(max);
+        }
+    });
+
+
 
 });

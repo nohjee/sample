@@ -10,31 +10,22 @@
     <abbr title="Phone">P:</abbr>
     425.555.0100
 </address>
-<form name="TestParameter">
-    <table id="valueTable">
+<form id="TestParameter" name="TestParameter">
+
+    <p>id생성 : <input id="createId" type="number" max="15" placeholder="최대값은 15입니다."/><input type="button" id="btnOk" value="생성"/></p>
+    <table id="valueTable" style="border: 1px solid black; width: 500px; text-align: center">
+        <thead>
         <tr>
-            <td><input name="in_val1" id="in_val1" value="a" /></td>
-            <td><input id="output_val1" disabled="true" /></td>
+            <td>구분</td>
+            <td>해당 정보</td>
         </tr>
-        <tr>
-            <td><input id="in_val2" value="b" /></td>
-            <td><input id="output_val2" disabled="true" /></td>
-        </tr>
-        <tr>
-            <td><input id="in_val3" value="c" /></td>
-            <td><input id="output_val3" disabled="true" /></td>
-        </tr>
-        <tr>
-            <td><input id="in_val4" value="d" /></td>
-            <td><input id="output_val4" disabled="true" /></td>
-        </tr>
-        <tr>
-            <td><input id="in_val5" value="e" /></td>
-            <td><input id="output_val5" disabled="true" /></td>
-        </tr>
-        <p><input type="button" id="btnOk" value="Click" /></p>
+        </thead>
+        <tbody>
+        
+        </tbody>
     </table>
 </form>
+
 <address>
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
