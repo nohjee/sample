@@ -25,16 +25,13 @@
     //	bonusCheck();
     $('#btnOk').click(function () {
 
-       
-            id = $.trim($('input[name=Id]').val());
-            name = $.trim($('input[name=Name]').val());
-            email = $.trim($('input[name=Email]').val());
-            address = $.trim($('input[name=Address]').val());
-            phone = $.trim($('input[name=Phone]').val());
+
+        var id = $('#createId').val();
+        $('#valueTable>tbody').remove();
 
 
-            if (id == '' || name == '' || email== '' || address =='' || phone =='') {
-                window.alert('모든 문항을 입력해주세요.');
+            if (id == '') {
+                window.alert('값을 입력해주세요');
                 return;
             }
 
@@ -43,15 +40,40 @@
                 type: 'POST',
                 url: '/PersonalInfo/TestDTO',
                 data: {
-                    Id: id, Name: name, Email: email, Address: address, Phone: phone
+                    createId: id
                 },
             success: function (data) {
 
                 data = JSON.parse(data);
-                console.log(data);
-               for (key in data) {
-                   $('#return_' + key.toLowerCase()).html(data[key]);
-               }
+                
+                for (var i=0; i<data.length; i++) {
+                    var row = '<tr>';
+                    row += '<td>아이디</td>';
+                    row += '<td>'+data[i].Id+'</td>';
+                    row += '</tr><tr>';
+
+                    row += ' <td>이름</td>';
+                    row += ' <td>'+data[i].Name+'</td>';
+                    row += '</tr><tr>';
+
+                    row += '<td>이메일</td>';
+                    row += '<td>' + data[i].Email + '</td>';
+                    row += '</tr><tr>';
+
+                    row += '<td>주소</td>';
+                    row += '<td>' + data[i].Address + '</td>';
+                    row += '</tr><tr>';
+
+                    row += '<td>전화번호</td>';
+                    row += '<td>' + data[i].Phone + '</td>';
+                    row += '</tr><tr>';
+
+                    row += '<td style="border-bottom: 1px solid black;">현재 날짜</td>';
+                    row += '<td style="border-bottom: 1px solid black;">' + data[i].NowDate + '</td>';
+                    row += '</tr>';
+
+                    $('#valueTable').append(row);
+                }
 
             },
             error: function (xhr, status, error) {
@@ -60,11 +82,14 @@
         });
     });
 
-    $('input[name=Id]').keyup(function () {
-        var id = $(this).val();
-        var maxLen = $(this).attr('maxLength');
-        if (id.length > maxLen.length) {
-            $(this).val(id.slice(0, maxLen));
+    $('#createId').keyup(function () {
+        
+        var id = $('#createId').val();
+        var max = $('#createId').attr('max');
+        id = parseInt(id);
+        max = parseInt(max);
+        if (id > max) {
+            $('#createId').val(max);
         }
     });
 

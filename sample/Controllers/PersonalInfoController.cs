@@ -27,13 +27,13 @@ namespace sample.Controllers
         }
 
         [HttpPost]
-        public String TestDTO(PersonalInfo info)
+        public String TestDTO(int createId)
         {
-            InfoProcess info_process = new InfoProcess();
-            string obj  = info_process.SetNowDate(info);
+            InfoProcess infoprocess = new InfoProcess();
+            String jsonData = infoprocess.SetInfoData(createId);
 
-            return obj;
-            
+            return jsonData;
+
         }
     }
 

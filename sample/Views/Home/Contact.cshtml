@@ -12,49 +12,18 @@
 </address>
 <form id="TestParameter" name="TestParameter">
 
-
+    <p>id생성 : <input id="createId" type="number" max="15" placeholder="최대값은 15입니다."/><input type="button" id="btnOk" value="생성"/></p>
     <table id="valueTable" style="border: 1px solid black; width: 500px; text-align: center">
         <thead>
         <tr>
             <td>구분</td>
-            <td>값 입력</td>
-            <td>결과 값</td>
+            <td>해당 정보</td>
         </tr>
         </thead>
-        <tr>
-            <td>아이디</td>
-            <td><input type="number" name="Id" maxlength="10"/></td>
-            @*<td><input id="return_id" disabled="true"/></td>*@
-            <td><p id="return_id"></p></td>
-        </tr>
-        <tr>
-            <td>이 름</td>
-            <td><input name="Name" maxlength="10"/></td>
-            <td><p id="return_name"></p></td>
-        </tr>
-        <tr>
-            <td>이메일</td>
-            <td><input name="Email" maxlength="10"/></td>
-            <td><p id="return_email"></p></td>
-        </tr>
-        <tr>
-            <td>주 소</td>
-            <td><input name="Address" maxlength="10"/></td>
-            <td><p id="return_address"></p></td>
-        </tr>
-        <tr>
-            <td>전화번호</td>
-            <td><input name="Phone" maxlength="10"/></td>
-            <td><p id="return_phone"></p></td>
-        </tr>
-        <tr>
-            <td>날 짜</td>
-            <td colspan="2"><p id="return_nowdate"></p></td>       
-        </tr>
-       
-
+        <tbody>
+        
+        </tbody>
     </table>
-    <input type="button" id="btnOk" value="값 입력" />
 </form>
 
 <address>
