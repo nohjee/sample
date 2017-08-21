@@ -1,0 +1,50 @@
+﻿@model List<sample.Models.StudentModels>
+
+@{
+    ViewBag.Title = "Student Database";
+}
+<style>
+table thead tr th {
+    text-align: center;
+}
+</style>
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+<table id="Student_List" style="border: 1px solid black; width: 500px;  text-align: center">
+    <tr>
+        <td>StudentID</td>
+        <td><input id="StudentModelsID" type="number" maxlength="10"/></td>
+    </tr>
+    <tr>
+        <td>LastName</td>
+        <td><input id="LastName"/></td>
+    </tr>
+    <tr>
+        <td>FirstMidName</td>
+        <td><input id="FirstMidName"/></td>
+    </tr>
+</table>
+<p><input type="button" value="저장" id="InsertDB"/></p>
+<br/>
+
+<table style="border: 1px solid black; width: 800px; border-spacing: 20px; text-align: center">
+    <thead>
+    <tr>
+        <th>StudentID</th>
+        <th>LastName</th>
+        <th>FirstMidName</th>
+        <th>EnrollmentDate</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var data in Model)
+    {
+        <tr>
+            <td>@data.StudentModelsID</td>
+            <td>@data.LastName</td>
+            <td>@data.FirstMidName</td>
+            <td>@data.EnrollmentDate</td>
+        </tr>
+    }
+    </tbody>
+</table>

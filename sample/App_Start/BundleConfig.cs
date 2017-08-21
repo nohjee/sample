@@ -28,7 +28,8 @@ namespace sample
 					  "~/Content/site.css"));
 
 			bundles.Add(new ScriptBundle("~/bundles/main").Include(
-					  "~/static/func_sample.js"));
+					  "~/static/func_sample.js",
+			    "~/static/DBTableProcess.js"));
 		}
 	}
 }
