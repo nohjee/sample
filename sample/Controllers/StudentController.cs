@@ -10,12 +10,13 @@ namespace sample.Controllers
 {
     public class StudentController : Controller
     {
-        private SchoolContext db = new SchoolContext();
+       
         // GET: Student
         public ActionResult Index()
         {
+            SchoolContext context = new SchoolContext();
             ViewBag.Message = "Student List";
-            return View(db.StudentModelses.ToList());
+            return View(context.StudentModels.ToList());
         }
 
         [HttpPost]

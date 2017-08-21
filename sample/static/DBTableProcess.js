@@ -1,12 +1,11 @@
 ﻿$(function() {
-    console.log('Student');
 
-    $('#InsertDB').click(function() {
-        var id = $.trim($('#StudentModelsID').val());
-        var L_Name = $.trim($('#LastName').val());
-        var FM_Name = $.trim($('#FirstMidName').val());
+    $('#insertDB').click(function() {
+        var id = $.trim($('#studentModelsID').val());
+        var lastName = $.trim($('#lastName').val());
+        var firstMidName = $.trim($('#firstMidName').val());
 
-        if (id == '' || L_Name == '' || FM_Name == '') {
+        if (id == '' || lastName == '' || firstMidName == '') {
             return;
         }
 
@@ -14,7 +13,7 @@
             type : 'POST',
             url : '/Student/DataInsert',
             data : {
-                StudentModelsID: id, LastName: L_Name, FirstMidName: FM_Name
+                StudentModelsID: id, LastName: lastName, FirstMidName: firstMidName
             },
             
             success: function (data) {
@@ -27,11 +26,11 @@
 
     });
 
-    $('#StudentModelsID').keyup(function () {
-        check_id = $('#StudentModelsID').val();
-        max_id = $('#StudentModelsID').attr('maxLength');
+    $('#studentModelsID').keyup(function () {
+        var check_id = $('#studentModelsID').val();
+        var max_id = $('#studentModelsID').attr('maxLength');
         if (check_id.length > max_id.length) {
-            $('#StudentModelsID').val(check_id.slice(0, max_id));
+            $('#studentModelsID').val(check_id.slice(0, max_id));
         }
     });
 });

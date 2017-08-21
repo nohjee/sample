@@ -64,7 +64,7 @@ namespace sample.DAL
 
             };
 
-            students.ForEach(s => context.StudentModelses.Add(s));
+            students.ForEach(s => context.StudentModels.Add(s));
             context.SaveChanges();
 
             var courses = new List<CourseModels>

@@ -10,7 +10,7 @@ namespace sample.DAL
 {
     public class SchoolContext : DbContext
     {
-        public DbSet<StudentModels> StudentModelses { get; set; }
+        public DbSet<StudentModels> StudentModels { get; set; }
         public DbSet<EnrollmentModels> EnrollmentModelses { get; set; }
         public DbSet<CourseModels> CourseModelses { get; set; }
 
