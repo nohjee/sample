@@ -86,13 +86,13 @@ namespace sample.DAL
                 new EnrollmentModels { StudentID = 1, CourseID = 2, Grade = 3 },
                 new EnrollmentModels { StudentID = 1, CourseID = 3, Grade = 1 },
                 new EnrollmentModels { StudentID = 2, CourseID = 4, Grade = 2 },
-                new EnrollmentModels { StudentID = 2, CourseID = 5, Grade = 4 },
-                new EnrollmentModels { StudentID = 2, CourseID = 6, Grade = 4 },
-                new EnrollmentModels { StudentID = 3, CourseID = 1      },
-                new EnrollmentModels { StudentID = 4, CourseID = 1,     },
+                new EnrollmentModels { StudentID = 2, CourseID = 5, Grade = 3 },
+                new EnrollmentModels { StudentID = 2, CourseID = 6, Grade = 5 },
+                new EnrollmentModels { StudentID = 3, CourseID = 1, Grade = 4 },
+                new EnrollmentModels { StudentID = 4, CourseID = 1, Grade = 3 },
                 new EnrollmentModels { StudentID = 4, CourseID = 2, Grade = 4 },
                 new EnrollmentModels { StudentID = 5, CourseID = 3, Grade = 3 },
-                new EnrollmentModels { StudentID = 6, CourseID = 4      },
+                new EnrollmentModels { StudentID = 6, CourseID = 4, Grade = 5 },
                 new EnrollmentModels { StudentID = 7, CourseID = 5, Grade = 2 },
             };
             enrollments.ForEach(s => context.EnrollmentModelses.Add(s));

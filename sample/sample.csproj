@@ -173,7 +173,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="Controllers\StudentModelsController.cs" />
     <Compile Include="DAL\SchoolContext.cs" />
     <Compile Include="DAL\SchoolInitializer.cs" />
     <Compile Include="DAL\StudentInsert.cs" />
@@ -246,11 +245,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\StudentModels\Create.cshtml" />
-    <Content Include="Views\StudentModels\Delete.cshtml" />
-    <Content Include="Views\StudentModels\Details.cshtml" />
-    <Content Include="Views\StudentModels\Edit.cshtml" />
-    <Content Include="Views\StudentModels\Index.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
