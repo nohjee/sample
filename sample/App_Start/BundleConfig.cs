@@ -29,7 +29,7 @@ namespace sample
 
 			bundles.Add(new ScriptBundle("~/bundles/main").Include(
 					  "~/static/func_sample.js",
-			    "~/static/DBTableProcess.js"));
+			    "~/static/dBTableProcess.js"));
 		}
 	}
 }
