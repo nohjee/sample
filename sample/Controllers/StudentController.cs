@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using sample.DAL;
 using sample.Models;
 
@@ -14,9 +15,10 @@ namespace sample.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            SchoolContext context = new SchoolContext();
+
+            SchoolManagement schoolManagement = new SchoolManagement();
             ViewBag.Message = "Student List";
-            return View(context.StudentModels.ToList());
+            return View(schoolManagement.SchoolList());
         }
 
         [HttpPost]
@@ -31,7 +33,7 @@ namespace sample.Controllers
         [HttpPost]
         public String StudentSelect(int searchId)
         {
-            StudentSearch studentSearch = new StudentSearch();
+            SchoolManagement studentSearch = new SchoolManagement();
             String result = studentSearch.SearchId(searchId);
             return result;
         }

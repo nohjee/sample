@@ -1,4 +1,4 @@
-﻿@model List<sample.Models.StudentModels>
+﻿@model List<sample.Models.SchoolListModels>
 
 @{
     ViewBag.Title = "Student Database";
@@ -30,7 +30,12 @@ table thead tr th {
 <table id="studentList" style="border: 1px solid black; width: 800px; border-spacing: 20px; text-align: center">
     <thead>
     <tr>
+        <th>EnrollmentID</th>
+        <th>CourseID</th>
         <th>StudentID</th>
+        <th>Grade</th>
+        <th>Title</th>
+        <th>Credits</th>
         <th>LastName</th>
         <th>FirstMidName</th>
         <th>EnrollmentDate</th>
@@ -40,7 +45,12 @@ table thead tr th {
     @foreach (var data in Model)
     {
         <tr>
+            <td>@data.EnrollmentModelsID</td>
+            <td>@data.CourseModelsID</td>
             <td>@data.StudentModelsID</td>
+            <td>@data.Grade</td>
+            <td>@data.Title</td>
+            <td>@data.Credits</td>
             <td>@data.LastName</td>
             <td>@data.FirstMidName</td>
             <td>@data.EnrollmentDate</td>

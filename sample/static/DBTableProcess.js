@@ -43,22 +43,35 @@
             data: { searchId: searchId },
             success: function (data) {
                 var obj = JSON.parse(data);
+                $('#studentList thead tr').remove();
                 $('#studentList tbody tr').remove();
-                var insertHtml = "";
+                var insertHtml = '';
 
+                insertHtml = '<tr>';
+                insertHtml += '<td>StudentID</td>';
+                insertHtml += '<td>LastName</td>';
+                insertHtml += '<td>FirstMidName</td>';
+                insertHtml += '<td>EnrollmentDate</td>';
+                insertHtml += '</tr>';
+                $('#studentList').append(insertHtml);
                 if (obj == '')
                 {
-                    insertHtml = "<tr><td colspan='4'>찾는 id가 없습니다.</td></tr>";
+                    insertHtml = '<tr><td colspan='+4+'>찾는 id가 없습니다.</td></tr>';
                     
                 }
                 else {
                     for (var i = 0; i < obj.length; i++) {
-                        insertHtml = "<tr>";
-                        insertHtml += "<td>" + obj[i].StudentModelsID + "</td>";
-                        insertHtml += "<td>" + obj[i].LastName + "</td>";
-                        insertHtml += "<td>" + obj[i].FirstMidName + "</td>";
-                        insertHtml += "<td>" + obj[i].EnrollmentDate + "</td>";
-                        insertHtml += "</tr>";
+                        insertHtml = '<tr>';
+                        insertHtml += '<td>' + obj[i].StudentModelsID + '</td>';
+                        insertHtml += '<td>' + obj[i].LastName + '</td>';
+                        insertHtml += '<td>' + obj[i].FirstMidName + '</td>';
+                        
+                        var dateFormat =
+                            new Date(parseInt(obj[i].EnrollmentDate.substring(6, obj[i].EnrollmentDate.length - 2)));
+                        var date = (dateFormat.getMonth() + 1) + '/' + dateFormat.getDate() + '/' + dateFormat.getFullYear();
+
+                        insertHtml += '<td>' + date + '</td>';
+                        insertHtml += '</tr>';
                     }
                 }
                 $('#studentList').append(insertHtml);
