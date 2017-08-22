@@ -39,11 +39,29 @@
         searchId = $('#searchId').val();
         $.ajax({
             type: 'POST',
-            url: '/Student/SearchID',
+            url: '/Student/StudentSelect',
             data: { searchId: searchId },
             success: function (data) {
+                var obj = JSON.parse(data);
                 $('#studentList tbody tr').remove();
-                $('#studentList').append(data);           
+                var insertHtml = "";
+
+                if (obj == '')
+                {
+                    insertHtml = "<tr><td colspan='4'>찾는 id가 없습니다.</td></tr>";
+                    
+                }
+                else {
+                    for (var i = 0; i < obj.length; i++) {
+                        insertHtml = "<tr>";
+                        insertHtml += "<td>" + obj[i].StudentModelsID + "</td>";
+                        insertHtml += "<td>" + obj[i].LastName + "</td>";
+                        insertHtml += "<td>" + obj[i].FirstMidName + "</td>";
+                        insertHtml += "<td>" + obj[i].EnrollmentDate + "</td>";
+                        insertHtml += "</tr>";
+                    }
+                }
+                $('#studentList').append(insertHtml);
             },
             error: function(xhr, status, error) {
                 console.log('error : ' + error);
