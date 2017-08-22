@@ -10,7 +10,7 @@ table thead tr th {
 </style>
 <h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
-<table id="studentList" style="border: 1px solid black; width: 500px;  text-align: center">
+<table style="border: 1px solid black; width: 500px;  text-align: center">
     <tr>
         <td>StudentID</td>
         <td><input id="studentModelsID" type="number" maxlength="10"/></td>
@@ -27,7 +27,7 @@ table thead tr th {
 <p><input type="button" value="저장" id="insertDB"/></p>
 <br/>
 
-<table style="border: 1px solid black; width: 800px; border-spacing: 20px; text-align: center">
+<table id="studentList" style="border: 1px solid black; width: 800px; border-spacing: 20px; text-align: center">
     <thead>
     <tr>
         <th>StudentID</th>
@@ -48,3 +48,10 @@ table thead tr th {
     }
     </tbody>
 </table>
+<div>
+    <p>
+        id검색 : <input type="number" id="searchId" maxlength="10"/>
+        <input type="button" id="searchIdOk" value="검색" disabled="true"/>
+        <input type="button" id="studentListOk" value="전체목록" />
+    </p>
+</div>

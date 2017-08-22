@@ -33,4 +33,46 @@
             $('#studentModelsID').val(check_id.slice(0, max_id));
         }
     });
+
+
+    $('#searchIdOk').click(function() {
+        searchId = $('#searchId').val();
+        $.ajax({
+            type: 'POST',
+            url: '/Student/SearchID',
+            data: { searchId: searchId },
+            success: function (data) {
+                $('#studentList tbody tr').remove();
+                $('#studentList').append(data);           
+            },
+            error: function(xhr, status, error) {
+                console.log('error : ' + error);
+            }
+
+        });
+    });
+
+    $('#studentListOk').click(function () {
+        location.reload();
+    });
+
+
+
+    $('#searchId').keyup(function () {
+
+        var checkid = $('#searchId').val();
+        var maxid = $('#searchId').attr('maxLength');
+        if (checkid.length > maxid.length) {
+            $('#searchId').val(checkid.slice(0, maxid));
+        }
+
+        if (checkid.length > 0) {
+            $('#searchIdOk').attr('disabled', false);
+        }
+        else
+        {
+            $('#searchIdOk').attr('disabled', true);
+        }
+    });
+
 });
