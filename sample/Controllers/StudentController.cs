@@ -15,27 +15,47 @@ namespace sample.Controllers
         // GET: Student
         public ActionResult Index()
         {
-
-            SchoolManagement schoolManagement = new SchoolManagement();
+            
             ViewBag.Message = "Student List";
-            return View(schoolManagement.SchoolList());
+            return View();
+        }
+
+        public ActionResult SchoolAdd()
+        {
+            return View();
         }
 
         [HttpPost]
-        public String DataInsert(StudentModels studentModels)
+        public String SetAddData(StudentModels studentModels, CourseModels courseModels)
         {
             StudentInsert studentInsert = new StudentInsert();
-            studentInsert.InsertData(studentModels);
+            studentInsert.SetAddStudent(studentModels, courseModels);
 
             return "success";
         }
 
         [HttpPost]
-        public String StudentSelect(int searchId)
+        public String GetSelectStudent(int searchId)
         {
             SchoolManagement studentSearch = new SchoolManagement();
-            String result = studentSearch.SearchId(searchId);
+            String result = studentSearch.GetSearchStudent(searchId);
             return result;
+        }
+
+        [HttpGet]
+        public String CourseList()
+        {
+            StudentInsert studentInsert = new StudentInsert();
+            String jsonCourse = studentInsert.GetCourseList();
+
+            return jsonCourse;
+        }
+
+        [HttpGet]
+        public String GetSchoolList()
+        {
+            SchoolManagement schoolManagement = new SchoolManagement();
+            return schoolManagement.GetStudentList();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace sample.Models
         public virtual StudentModels Student { get; set; }
     }
 
-    public class SchoolListModels
+    public class StudentListModels
     {
         public int StudentModelsID { get; set; }
         public int CourseModelsID { get; set; }
@@ -44,5 +44,12 @@ namespace sample.Models
         public String FirstMidName { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public virtual ICollection<EnrollmentModels> schoolListModels { get; set; }
+    }
+
+    public class CourseListModels
+    {
+        public int CourseModelsID { get; set; }
+        public String Title { get; set; }
+        public int Credits { get; set; }
     }
 }

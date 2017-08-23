@@ -1,36 +1,28 @@
-﻿$(function() {
+﻿$(function () {
 
-    $('#insertDB').click(function() {
-        var id = $.trim($('#studentModelsID').val());
-        var lastName = $.trim($('#lastName').val());
-        var firstMidName = $.trim($('#firstMidName').val());
-
-        if (id == '' || lastName == '' || firstMidName == '') {
-            return;
-        }
-
-        $.ajax({
-            type : 'POST',
-            url : '/Student/DataInsert',
-            data : {
-                StudentModelsID: id, LastName: lastName, FirstMidName: firstMidName
-            },
-            
-            success: function (data) {
-                location.reload();
-            },
-            error : function(xhr, status, error) {
-                console.log('error :' + error);
+    $.ajax({
+        type: 'GET',
+        url: '/Student/GetSchoolList',
+        success: function (data) {
+            var jsonSchoolList = JSON.parse(data);     
+            for (var i = 0; i < jsonSchoolList.length; i++) {
+                var innerHtml = '<tr>';
+                innerHtml += '<td>' + jsonSchoolList[i].EnrollmentModelsID + '</td>';
+                innerHtml += '<td>' + jsonSchoolList[i].CourseModelsID + '</td>';
+                innerHtml += '<td>' + jsonSchoolList[i].StudentModelsID + '</td>';
+                innerHtml += '<td>' + jsonSchoolList[i].Grade + '</td>';
+                innerHtml += '<td>' + jsonSchoolList[i].Title + '</td>';
+                innerHtml += '<td>' + jsonSchoolList[i].Credits + '</td>';
+                innerHtml += '<td>' + jsonSchoolList[i].LastName + '</td>';
+                innerHtml += '<td>' + jsonSchoolList[i].FirstMidName + '</td>';
+                innerHtml += '<td>' + jsonSchoolList[i].EnrollmentDate + '</td>';
+                innerHtml += '</tr>';
+                $('#studentList').append(innerHtml);
             }
-        });
-
-    });
-
-    $('#studentModelsID').keyup(function () {
-        var check_id = $('#studentModelsID').val();
-        var max_id = $('#studentModelsID').attr('maxLength');
-        if (check_id.length > max_id.length) {
-            $('#studentModelsID').val(check_id.slice(0, max_id));
+            
+        },
+        error: function (xhr, status, error) {
+            console.log('error :' + error);
         }
     });
 
@@ -39,42 +31,33 @@
         searchId = $('#searchId').val();
         $.ajax({
             type: 'POST',
-            url: '/Student/StudentSelect',
+            url: '/Student/GetSelectStudent',
             data: { searchId: searchId },
             success: function (data) {
-                var obj = JSON.parse(data);
-                $('#studentList thead tr').remove();
                 $('#studentList tbody tr').remove();
-                var insertHtml = '';
-
-                insertHtml = '<tr>';
-                insertHtml += '<td>StudentID</td>';
-                insertHtml += '<td>LastName</td>';
-                insertHtml += '<td>FirstMidName</td>';
-                insertHtml += '<td>EnrollmentDate</td>';
-                insertHtml += '</tr>';
-                $('#studentList').append(insertHtml);
-                if (obj == '')
+                var selectScholl = JSON.parse(data);
+                if (selectScholl.length==0)
                 {
-                    insertHtml = '<tr><td colspan='+4+'>찾는 id가 없습니다.</td></tr>';
-                    
+                    insertHtml = '<tr><td colspan='+9+'>찾는 id가 없습니다.</td></tr>';
+                    $('#studentList').append(insertHtml);
                 }
                 else {
-                    for (var i = 0; i < obj.length; i++) {
-                        insertHtml = '<tr>';
-                        insertHtml += '<td>' + obj[i].StudentModelsID + '</td>';
-                        insertHtml += '<td>' + obj[i].LastName + '</td>';
-                        insertHtml += '<td>' + obj[i].FirstMidName + '</td>';
-                        
-                        var dateFormat =
-                            new Date(parseInt(obj[i].EnrollmentDate.substring(6, obj[i].EnrollmentDate.length - 2)));
-                        var date = (dateFormat.getMonth() + 1) + '/' + dateFormat.getDate() + '/' + dateFormat.getFullYear();
-
-                        insertHtml += '<td>' + date + '</td>';
-                        insertHtml += '</tr>';
+                    for (var i = 0; i < selectScholl.length; i++) {
+                        var innerHtml = '<tr>';
+                        innerHtml += '<td>' + selectScholl[i].EnrollmentModelsID + '</td>';
+                        innerHtml += '<td>' + selectScholl[i].CourseModelsID + '</td>';
+                        innerHtml += '<td>' + selectScholl[i].StudentModelsID + '</td>';
+                        innerHtml += '<td>' + selectScholl[i].Grade + '</td>';
+                        innerHtml += '<td>' + selectScholl[i].Title + '</td>';
+                        innerHtml += '<td>' + selectScholl[i].Credits + '</td>';
+                        innerHtml += '<td>' + selectScholl[i].LastName + '</td>';
+                        innerHtml += '<td>' + selectScholl[i].FirstMidName + '</td>';
+                        innerHtml += '<td>' + selectScholl[i].EnrollmentDate + '</td>';
+                        innerHtml += '</tr>';
+                        $('#studentList').append(innerHtml);
                     }
                 }
-                $('#studentList').append(insertHtml);
+                
             },
             error: function(xhr, status, error) {
                 console.log('error : ' + error);
@@ -86,7 +69,6 @@
     $('#studentListOk').click(function () {
         location.reload();
     });
-
 
 
     $('#searchId').keyup(function () {

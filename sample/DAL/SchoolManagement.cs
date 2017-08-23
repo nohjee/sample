@@ -11,38 +11,44 @@ namespace sample.DAL
     public class SchoolManagement
     {
         [HttpPost]
-        public String SearchId(int searchId)
+        public String GetSearchStudent(int searchId)
         {
             SchoolContext context = new SchoolContext();
-            var findId = from m in context.StudentModels
-                where m.StudentModelsID == searchId
-                select 
-                new
+            var findId = (from enroll in context.EnrollmentModelses
+                join
+                coures in context.CourseModelses on
+                enroll.CourseModelsID equals coures.CourseModelsID
+                into leftenroll1
+                from coures in leftenroll1.DefaultIfEmpty()
+                join
+                student in context.StudentModels on
+                enroll.StudentModelsID equals student.StudentModelsID
+                into leftenroll2
+                from student in leftenroll2.DefaultIfEmpty()
+                where enroll.StudentModelsID == searchId
+                orderby enroll.EnrollmentModelsID
+                select
+                new StudentListModels()
                 {
-                    m.StudentModelsID,
-                    m.EnrollmentDate,
-                    m.FirstMidName,
-                    m.LastName
-                };
+                    StudentModelsID = student.StudentModelsID,
+                    CourseModelsID = coures.CourseModelsID,
+                    EnrollmentModelsID = enroll.EnrollmentModelsID,
+                    Grade = enroll.Grade,
+                    Title = coures.Title,
+                    Credits = coures.Credits,
+                    FirstMidName = student.FirstMidName,
+                    LastName = student.LastName,
+                    EnrollmentDate = student.EnrollmentDate
+                }).ToList();
 
-            List<StudentModels> studentInfo = new List<StudentModels>();
-            foreach (var key in findId)
-            {
-                studentInfo.Add(new StudentModels()
-                {
-                    StudentModelsID = key.StudentModelsID,
-                    EnrollmentDate = key.EnrollmentDate,
-                    FirstMidName = key.FirstMidName,
-                    LastName = key.LastName
-                });
-            }
+            
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            String result = javaScriptSerializer.Serialize(studentInfo);
+            String result = javaScriptSerializer.Serialize(findId);
             return result;
 
         }
 
-        public List<SchoolListModels> SchoolList()
+        public String GetStudentList()
         {
             SchoolContext context = new SchoolContext();
 
@@ -50,42 +56,32 @@ namespace sample.DAL
                 join
                 coures in context.CourseModelses on
                 enroll.CourseModelsID equals coures.CourseModelsID
+                into leftenroll1
+                from coures in leftenroll1.DefaultIfEmpty()
                 join
                 student in context.StudentModels on
                 enroll.StudentModelsID equals student.StudentModelsID
+                into leftenroll2
+                from student in leftenroll2.DefaultIfEmpty()
                 orderby enroll.EnrollmentModelsID
-                select
-                new
+                select 
+                 new StudentListModels()
                 {
-                    enroll.StudentModelsID,
-                    enroll.CourseModelsID,
-                    enroll.EnrollmentModelsID,
-                    enroll.Grade,
-                    coures.Title,
-                    coures.Credits,
-                    student.FirstMidName,
-                    student.LastName,
-                    student.EnrollmentDate
+                    StudentModelsID = enroll.StudentModelsID,
+                    CourseModelsID = enroll.CourseModelsID,
+                    EnrollmentModelsID = enroll.EnrollmentModelsID,
+                    Grade = enroll.Grade,
+                    Title = coures.Title,
+                    Credits = coures.Credits,
+                    FirstMidName = student.FirstMidName,
+                    LastName = student.LastName,
+                    EnrollmentDate = student.EnrollmentDate
                 }).ToList();
 
-            List<SchoolListModels> schoolList = new List<SchoolListModels>();
+            JavaScriptSerializer schoolList = new JavaScriptSerializer();
+            String jsonSchoolList = schoolList.Serialize(schoolData);
 
-            foreach (var key in schoolData)
-            {
-                schoolList.Add(new SchoolListModels()
-                {
-                    StudentModelsID = key.StudentModelsID,
-                    CourseModelsID = key.CourseModelsID,
-                    EnrollmentModelsID = key.EnrollmentModelsID,
-                    Grade = key.Grade,
-                    Title = key.Title,
-                    Credits = key.Credits,
-                    FirstMidName = key.FirstMidName,
-                    LastName = key.LastName,
-                    EnrollmentDate = key.EnrollmentDate
-                });
-            }
-            return schoolList;
+            return jsonSchoolList;
         }
     }
 }
