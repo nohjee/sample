@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
@@ -14,37 +15,56 @@ namespace sample.DAL
     public class StudentInsert
     {
        
-        public void SetAddStudent(StudentModels studentModels,CourseModels courseModels)
+        public String SetAddStudent(StudentModels studentModels,CourseModels courseModels)
         {
-            Console.WriteLine(courseModels);
-            SchoolContext context = new SchoolContext();
-            studentModels.EnrollmentDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            context.StudentModels.Add(studentModels);
-            context.SaveChanges();
+            try
+            {
+                SchoolContext context = new SchoolContext();
+                studentModels.EnrollmentDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                context.StudentModels.Add(studentModels);
+                context.SaveChanges();
 
-            EnrollmentModels enrollmentModels = new EnrollmentModels();
-            enrollmentModels.StudentModelsID = studentModels.StudentModelsID;
-            enrollmentModels.CourseModelsID = courseModels.CourseModelsID;
-            context.EnrollmentModelses.Add(enrollmentModels);
-            context.SaveChanges();
+                EnrollmentModels enrollmentModels = new EnrollmentModels();
+                enrollmentModels.StudentModelsID = studentModels.StudentModelsID;
+                enrollmentModels.CourseModelsID = courseModels.CourseModelsID;
+                context.EnrollmentModelses.Add(enrollmentModels);
+                context.SaveChanges();
+                return "success";
+            }
+            
+            catch (DbUpdateException exception)
+            {
+                Console.WriteLine(exception.ToString());
+                return "fail";
+            }
+           
         }
 
 
         public String GetCourseList()
         {
-            SchoolContext context = new SchoolContext();
-            var courseList = (from course in context.CourseModelses
-                select new CourseListModels()
-                {
-                    CourseModelsID = course.CourseModelsID,
-                    Credits = course.Credits,
-                    Title = course.Title
-                }).ToList();
+            try
+            {
+                SchoolContext context = new SchoolContext();
+                var courseList = (from course in context.CourseModelses
+                    select new CourseListModels()
+                    {
+                        CourseModelsID = course.CourseModelsID,
+                        Credits = course.Credits,
+                        Title = course.Title
+                    }).ToList();
 
-            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            String jsonCourse = javaScriptSerializer.Serialize(courseList);
+                JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+                String jsonCourse = javaScriptSerializer.Serialize(courseList);
 
-            return jsonCourse;
+                return jsonCourse;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+           
         }
     }
 }

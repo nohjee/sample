@@ -26,12 +26,12 @@ namespace sample.Controllers
         }
 
         [HttpPost]
-        public String SetAddData(StudentModels studentModels, CourseModels courseModels)
+        public String AddSchoolData(StudentModels studentModels, CourseModels courseModels)
         {
             StudentInsert studentInsert = new StudentInsert();
-            studentInsert.SetAddStudent(studentModels, courseModels);
+            String result = studentInsert.SetAddStudent(studentModels, courseModels);
 
-            return "success";
+            return result;
         }
 
         [HttpPost]
