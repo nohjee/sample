@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -15,7 +16,6 @@ namespace sample.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            
             ViewBag.Message = "Student List";
             return View();
         }
@@ -26,36 +26,42 @@ namespace sample.Controllers
         }
 
         [HttpPost]
-        public String AddSchoolData(StudentModels studentModels, CourseModels courseModels)
+        public String AddStudentInfomation(StudentModels studentModels, CourseModels courseModels)
         {
-            StudentInsert studentInsert = new StudentInsert();
-            String result = studentInsert.SetAddStudent(studentModels, courseModels);
+            SchoolManagement schoolManagement = new SchoolManagement();
+            String result = schoolManagement.SetStudentInfomation(studentModels, courseModels);
 
             return result;
         }
 
         [HttpPost]
-        public String GetSelectStudent(int searchId)
+        public async Task<string> GetSelectStudent(int searchId)
         {
             SchoolManagement studentSearch = new SchoolManagement();
-            String result = studentSearch.GetSearchStudent(searchId);
-            return result;
+            List<StudentListModels> selectStudnet = await studentSearch.GetSearchStudent(searchId);
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            String jsonSelectStudnet = javaScriptSerializer.Serialize(selectStudnet);
+            return jsonSelectStudnet;
         }
 
         [HttpGet]
-        public String CourseList()
+        public async Task<string> CourseList()
         {
-            StudentInsert studentInsert = new StudentInsert();
-            String jsonCourse = studentInsert.GetCourseList();
-
+            SchoolManagement schoolManagement = new SchoolManagement();
+            List<CourseListModels> courseList = await schoolManagement.GetCourseList();
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            String jsonCourse = javaScriptSerializer.Serialize(courseList);
             return jsonCourse;
         }
 
         [HttpGet]
-        public String GetSchoolList()
+        public async Task<string> GetSchoolList()
         {
             SchoolManagement schoolManagement = new SchoolManagement();
-            return schoolManagement.GetStudentList();
+            List<StudentListModels> studentList = await schoolManagement.GetStudentList();
+            JavaScriptSerializer schoolList = new JavaScriptSerializer();
+            String jsonStudentlList = schoolList.Serialize(studentList);
+            return jsonStudentlList;
         }
     }
 }

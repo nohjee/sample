@@ -36,7 +36,7 @@
         }
         $.ajax({
             type: 'POST',
-            url: '/Student/AddSchoolData',
+            url: '/Student/AddStudentInfomation',
             data: {
                 LastName: lastName, FirstMidName: firstMidName, courseModelsID :courseSelect
             },
