@@ -1,19 +1,20 @@
-﻿$(function ()
-{
+﻿$(function () {
     $.ajax({
         type: 'GET',
         url: '/Student/GetSchoolList',
-        success: function (data)
-        {
-            var jsonSchoolList = JSON.parse(data);
+        success: function (data) {
+            if (data == 'error') {
+                location.replace('/Student/ErrorMessage');
+            }
 
+            var jsonSchoolList = JSON.parse(data);
             var innerHtml = '';
 
-            if (jsonSchoolList.length == 0)
-            {
+            if (jsonSchoolList == '') {
                 innerHtml = '<tr><td colspan=' + 9 + '>학생정보가 없습니다.</td></tr>';
                 $('#studentList').append(innerHtml);
             } else {
+                
                 for (var i = 0; i < jsonSchoolList.length; i++) {
                     innerHtml = '<tr>';
                     innerHtml += '<td>' + jsonSchoolList[i].EnrollmentModelsID + '</td>';
@@ -30,32 +31,32 @@
                 }
             }
         },
-        error: function (xhr, status, error)
-        {
+        error: function (xhr, status, error) {
             console.log('error :' + error);
         }
     });
 
-    $('#searchIdOk').click(function() {
+    $('#searchIdOk').click(function () {
         searchId = $('#searchId').val();
+
         $.ajax({
             type: 'POST',
             url: '/Student/GetSelectStudent',
             data: { searchId: searchId },
-            success: function (data)
-            {
-                $('#studentList tbody tr').remove();
+            success: function (data) {            
+                if (data == 'error') {
+                    location.replace('/Student/ErrorMessage');
+                }
 
+                $('#studentList tbody tr').remove();
                 var selectScholl = JSON.parse(data);
-                if (selectScholl.length==0)
-                {
+
+                if (selectScholl == '') {
                     insertHtml = '<tr><td colspan='+9+'>찾는 id가 없습니다.</td></tr>';
                     $('#studentList').append(insertHtml);
                 }
-                else
-                {
-                    for (var i = 0; i < selectScholl.length; i++)
-                    {
+                else {                   
+                    for (var i = 0; i < selectScholl.length; i++) {
                         var innerHtml = '<tr>';
                         innerHtml += '<td>' + selectScholl[i].EnrollmentModelsID + '</td>';
                         innerHtml += '<td>' + selectScholl[i].CourseModelsID + '</td>';
@@ -72,36 +73,30 @@
                 }
                 
             },
-            error: function (xhr, status, error)
-            {
+            error: function (xhr, status, error) {
                 console.log('error : ' + error);
             }
 
         });
     });
 
-    $('#studentListOk').click(function ()
-    {
+    $('#studentListOk').click(function () {
         location.reload();
     });
 
 
-    $('#searchId').keyup(function ()
-    {
-
+    $('#searchId').keyup(function () {
         var checkid = $('#searchId').val();
         var maxid = $('#searchId').attr('maxLength');
-        if (checkid.length > maxid.length)
-        {
+
+        if (checkid.length > maxid.length) {
             $('#searchId').val(checkid.slice(0, maxid));
         }
 
-        if (checkid.length > 0)
-        {
+        if (checkid.length > 0) {
             $('#searchIdOk').attr('disabled', false);
         }
-        else
-        {
+        else {
             $('#searchIdOk').attr('disabled', true);
         }
     });

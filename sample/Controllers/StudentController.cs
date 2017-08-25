@@ -25,6 +25,11 @@ namespace sample.Controllers
             return View();
         }
 
+        public ActionResult ErrorMessage()
+        {
+            return View();
+        }
+
         [HttpPost]
         public String AddStudentInfomation(StudentModels studentModels, CourseModels courseModels)
         {
@@ -38,30 +43,24 @@ namespace sample.Controllers
         public async Task<string> GetSelectStudent(int searchId)
         {
             SchoolManagement studentSearch = new SchoolManagement();
-            List<StudentListModels> selectStudnet = await studentSearch.GetSearchStudent(searchId);
-            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            String jsonSelectStudnet = javaScriptSerializer.Serialize(selectStudnet);
-            return jsonSelectStudnet;
+            String selectStudnet = await studentSearch.GetSearchStudent(searchId);
+            return selectStudnet;
         }
 
         [HttpGet]
         public async Task<string> CourseList()
         {
             SchoolManagement schoolManagement = new SchoolManagement();
-            List<CourseListModels> courseList = await schoolManagement.GetCourseList();
-            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            String jsonCourse = javaScriptSerializer.Serialize(courseList);
-            return jsonCourse;
+            String courseList = await schoolManagement.GetCourseList();       
+            return courseList;
         }
 
         [HttpGet]
         public async Task<string> GetSchoolList()
         {
             SchoolManagement schoolManagement = new SchoolManagement();
-            List<StudentListModels> studentList = await schoolManagement.GetStudentList();
-            JavaScriptSerializer schoolList = new JavaScriptSerializer();
-            String jsonStudentlList = schoolList.Serialize(studentList);
-            return jsonStudentlList;
+            String studentList = await schoolManagement.GetStudentList();
+            return studentList;
         }
     }
 }
