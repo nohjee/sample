@@ -1,57 +1,79 @@
 ﻿$(function() {
-	console.log('in');
+    console.log('in');
 
 
-	function bonusCheck(ch) {
-		$.ajax({
-			type: 'GET',
-			data: {
-				BonusCode: 'test-nohjee'
-			},
-			url: '/Home/GetBonusCheck',
-			success: function (data) {
-				console.log('SuccessCode: ' + data);
-			},
-			error: function (xhr, status, error) {
-				console.log('error : ' + error);
-			}
-		});
-	}
+    function bonusCheck(ch) {
+        $.ajax({
+            type: 'GET',
+            data: {
+                BonusCode: 'test-nohjee'
+            },
+            url: '/Home/GetBonusCheck',
+            success: function(data) {
+                console.log('SuccessCode: ' + data);
+            },
+            error: function(xhr, status, error) {
+                console.log('error : ' + error);
+            }
+        });
+    }
 
     //	bonusCheck();
-	$('#btnOk').click(function () {
+    $('#btnOk').click(function() {
 
-	    var table = document.getElementById('valueTable');
-	    var row_len = table.rows.length;
+        var id = document.getElementById('id').value;
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var address = document.getElementById('address').value;
+        var phone = document.getElementById('phone').value;
 
-	    var inval = new Array();
+        // 공백제거
+        name = $.trim(name); 
+        email = $.trim(email);
+        address = $.trim(address);
+        phone = $.trim(phone);
+        if (id == '' || name == '' || email == '' || address == '' || phone == '') {
+        window.alert('모든 항목을 작성하세요.');        
+        return;
+        }
+ 
+       
 
-	    for (var i = 1; i <= row_len; i++) {
-	        var temp = document.getElementById('in_val' + [i]);
-	        inval[i - 1] = temp.value;
-	    }
+        $.ajax({
+            type: 'POST',
+            url: '/HOME/TestParam',
+            data: {
+                id: id,
+                name: name,
+                email: email,
+                address: address,
+                phone: phone
+            },
 
-	    $.ajax({
-	        type: 'POST',
-	        url: '/HOME/TestParam',
-	        data: {
-	            inval1: inval[0], inval2: inval[1], inval3: inval[2], inval4: inval[3], inval5: inval[4]
-	        },
-
-	        success: function (data) {
-	            data = JSON.parse(data);
-	            var number = 1;
-
-	            for (key in data) {
-	                temp = document.getElementById('output_val' + number);
-	                temp.value = data[key];
-	                number++;
+            success: function(data) {
+                data = JSON.parse(data);
+                for (key in data) {
+                    $('#return_' + key.toLowerCase()).val(data[key]);  
                 }
-	        },
-	        error: function (xhr, status, error) {
-	            console.log('error : ' + error);
-	        }
-	    });
-	});
+
+            },
+            error: function(xhr, status, error) {
+                console.log('error : ' + error);
+            }
+        });
+    });
+
+    
+    $('#id').keyup(function () {
+        var id = $('#id').val();
+        var lengh_limit = $(this).attr('maxlength');
+        if (id.length > lengh_limit) {
+            $('#id').val(id.slice(0, lengh_limit));
+        }
+    });
 
 });
+
+  
+
+
