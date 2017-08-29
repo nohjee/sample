@@ -18,40 +18,81 @@
 		});
 	}
 
+
+
+    
+
+    for (var i = 0; i < 3; i++) {
+        var row = '<tr>';
+        row += '<td>아이디</td>';
+        row += '<td><input type="number" name="id" maxlength="10"/></td>';
+        row += '<td><input name="return_id" disabled="true"/></td>';
+        row += '</tr><tr><td></td></tr><tr>';   
+        row += ' <td>이름</td>';
+        row += ' <td><input name="name"/></td>';
+        row += ' <td><input name="return_name" disabled="true"/></td>';
+        row += '</tr><tr><td></td></tr><tr>';
+           
+        row += '<td>이메일</td>';
+        row += ' <td><input name="email"/></td>';
+        row += '<td><input name="return_email" disabled="true"/></td>';
+        row += '</tr>';
+        $('#valueTable').append(row);
+    }
+
+
+
     //	bonusCheck();
-	$('#btnOk').click(function () {
+    $('#btnOk').click(function () {
 
-	    var table = document.getElementById('valueTable');
-	    var row_len = table.rows.length;
+	 
+	    var id_len = $('input[name=id]');
+	    var id = new Array();
+	    var name = new Array();
+	    var email = new Array();
 
-	    var inval = new Array();
+	    for (var i = 0; i < id_len.length; i++) {
+	        id[i] = $.trim($('input[name=id]').eq(i).val());
+	        name[i] = $.trim($('input[name=name]').eq(i).val());
+	        email[i] = $.trim($('input[name=email]').eq(i).val());
 
-	    for (var i = 1; i <= row_len; i++) {
-	        var temp = document.getElementById('in_val' + [i]);
-	        inval[i - 1] = temp.value;
+	        if (id[i] == '' || name[i] == '' || email[i] == '') {
+	            window.alert('모든 문항을 입력해주세요.');
+	            return;
+	        }
 	    }
 
+
+	   
 	    $.ajax({
 	        type: 'POST',
-	        url: '/HOME/TestParam',
+	        url: '/HOME/TestParam',      
 	        data: {
-	            inval1: inval[0], inval2: inval[1], inval3: inval[2], inval4: inval[3], inval5: inval[4]
+	            idArr: id, nameArr: name, emailArr: email
 	        },
 
 	        success: function (data) {
-	            data = JSON.parse(data);
-	            var number = 1;
 
-	            for (key in data) {
-	                temp = document.getElementById('output_val' + number);
-	                temp.value = data[key];
-	                number++;
+	            data = JSON.parse(data);
+                for (var j = 0; j < data.length; j++) {
+                    $('input[name=return_id').eq(j).val(data[j].Id);
+                    $('input[name=return_name').eq(j).val(data[j].Name);
+                    $('input[name=return_email').eq(j).val(data[j].Email);
                 }
+
 	        },
 	        error: function (xhr, status, error) {
 	            console.log('error : ' + error);
 	        }
 	    });
 	});
+
+    $('input[name=id]').keyup(function () {
+        var id = $(this).val();
+        var maxLen = $(this).attr('maxLength');
+        if (id.length > maxLen.length) {
+            $(this).val(id.slice(0, maxLen));
+        }
+    });
 
 });

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Web.WebPages;
 using sample.Common;
 
 namespace sample.Controllers
@@ -37,31 +38,42 @@ namespace sample.Controllers
 		}
 
         [HttpPost]
-        public String TestParam(String inval1, String inval2, String inval3, String inval4, String inval5)
+        public String TestParam(int[] idArr, String[] nameArr, String[] emailArr)
         {
-            
-            sampleClass sC = new sampleClass();
+            GetListClass listClass = new GetListClass();
+            listClass.ListInfoValue = new List<GetValueReturn>(); 
 
-            sC.Input1 = inval1;
-            sC.Input2 = inval2;
-            sC.Input3 = inval3;
-            sC.Input4 = inval4;
-            sC.Input5 = inval5;
+            for (int i = 0; i < idArr.Length; i++)
+            {
+                GetValueReturn vr = new GetValueReturn(idArr[i],nameArr[i],emailArr[i]);  
+                listClass.ListInfoValue.Add(vr);
+            } 
+             JavaScriptSerializer json_par = new JavaScriptSerializer();
+              string obj = json_par.Serialize(listClass.ListInfoValue);
 
-            JavaScriptSerializer json_par = new JavaScriptSerializer();
-            string obj = json_par.Serialize(sC);
+
             return obj;
         }
 
     }
 
-    public class sampleClass
+    public class GetValueReturn
     {
-        public String Input1 { get; set; }
-        public String Input2 { get; set; }
-        public String Input3 { get; set; }
-        public String Input4 { get; set; }
-        public String Input5 { get; set; }
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public String Email { get; set; }
 
+        public GetValueReturn(int Id, String Name, String Email)
+        {
+            this.Id = Id;
+            this.Name = Name;
+            this.Email = Email;
+        }
+
+    }
+
+    public class GetListClass
+    {
+        public List<GetValueReturn> ListInfoValue { get; set; }
     }
 }
