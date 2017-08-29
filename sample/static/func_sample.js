@@ -1,5 +1,5 @@
 ﻿$(function() {
-	console.log('in');
+    console.log('in');
 
 
 	function bonusCheck(ch) {

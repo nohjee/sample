@@ -175,7 +175,7 @@
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\SchoolContext.cs" />
     <Compile Include="DAL\SchoolInitializer.cs" />
-    <Compile Include="DAL\StudentInsert.cs" />
+    <Compile Include="DAL\SchoolManagement.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,6 +207,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="static\CourseList.js" />
     <Content Include="static\dBTableProcess.js" />
     <Content Include="static\func_sample.js" />
     <Content Include="Web.config">
@@ -246,6 +247,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\SchoolAdd.cshtml" />
+    <Content Include="Views\Student\ErrorMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
