@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using sample.Models;
+using StudentData;
 
 namespace sample.DAL
 {
@@ -75,6 +76,8 @@ namespace sample.DAL
                 new CourseModels { Title = "Calculus",    Credits = 4, },
                 new CourseModels { Title = "Trigonometry",  Credits = 4, },
                 new CourseModels { Title = "Composition",  Credits = 3, },
+                new CourseModels { Title = "physics", Credits = 2, },
+                new CourseModels { Title = "mathematics", Credits = 2, },
                 new CourseModels { Title = "Literature",  Credits = 4, }
             };
             courses.ForEach(s => context.CourseModelses.Add(s));
@@ -82,18 +85,18 @@ namespace sample.DAL
 
             var enrollments = new List<EnrollmentModels>
             {
-                new EnrollmentModels { StudentID = 1, CourseID = 1, Grade = 1 },
-                new EnrollmentModels { StudentID = 1, CourseID = 2, Grade = 3 },
-                new EnrollmentModels { StudentID = 1, CourseID = 3, Grade = 1 },
-                new EnrollmentModels { StudentID = 2, CourseID = 4, Grade = 2 },
-                new EnrollmentModels { StudentID = 2, CourseID = 5, Grade = 3 },
-                new EnrollmentModels { StudentID = 2, CourseID = 6, Grade = 5 },
-                new EnrollmentModels { StudentID = 3, CourseID = 1, Grade = 4 },
-                new EnrollmentModels { StudentID = 4, CourseID = 1, Grade = 3 },
-                new EnrollmentModels { StudentID = 4, CourseID = 2, Grade = 4 },
-                new EnrollmentModels { StudentID = 5, CourseID = 3, Grade = 3 },
-                new EnrollmentModels { StudentID = 6, CourseID = 4, Grade = 5 },
-                new EnrollmentModels { StudentID = 7, CourseID = 5, Grade = 2 },
+                new EnrollmentModels { StudentModelsID = 1, CourseModelsID = 1, Grade = 1 },
+                new EnrollmentModels { StudentModelsID = 1, CourseModelsID = 2, Grade = 3 },
+                new EnrollmentModels { StudentModelsID = 1, CourseModelsID = 3, Grade = 1 },
+                new EnrollmentModels { StudentModelsID = 2, CourseModelsID = 4, Grade = 2 },
+                new EnrollmentModels { StudentModelsID = 2, CourseModelsID = 5, Grade = 3 },
+                new EnrollmentModels { StudentModelsID = 2, CourseModelsID = 6, Grade = 5 },
+                new EnrollmentModels { StudentModelsID = 3, CourseModelsID = 1, Grade = 4 },
+                new EnrollmentModels { StudentModelsID = 4, CourseModelsID = 1, Grade = 3 },
+                new EnrollmentModels { StudentModelsID = 4, CourseModelsID = 2, Grade = 4 },
+                new EnrollmentModels { StudentModelsID = 5, CourseModelsID = 3, Grade = 3 },
+                new EnrollmentModels { StudentModelsID = 6, CourseModelsID = 4, Grade = 5 },
+                new EnrollmentModels { StudentModelsID = 7, CourseModelsID = 5, Grade = 2 },
             };
             enrollments.ForEach(s => context.EnrollmentModelses.Add(s));
             context.SaveChanges();

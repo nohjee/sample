@@ -1,50 +1,63 @@
-﻿@model List<sample.Models.StudentModels>
-
-@{
+﻿@{
     ViewBag.Title = "Student Database";
 }
+
 <style>
-table thead tr th {
-    text-align: center;
-}
+    span.field-validation-error {
+        color: red;
+    }
 </style>
 <h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
-<table id="studentList" style="border: 1px solid black; width: 500px;  text-align: center">
-    <tr>
-        <td>StudentID</td>
-        <td><input id="studentModelsID" type="number" maxlength="10"/></td>
-    </tr>
-    <tr>
-        <td>LastName</td>
-        <td><input id="lastName"/></td>
-    </tr>
-    <tr>
-        <td>FirstMidName</td>
-        <td><input id="firstMidName"/></td>
-    </tr>
-</table>
-<p><input type="button" value="저장" id="insertDB"/></p>
-<br/>
 
-<table style="border: 1px solid black; width: 800px; border-spacing: 20px; text-align: center">
-    <thead>
-    <tr>
-        <th>StudentID</th>
-        <th>LastName</th>
-        <th>FirstMidName</th>
-        <th>EnrollmentDate</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var data in Model)
-    {
+<div style="width: 90%; margin: 0 auto;">
+@*Search Area*@
+    <div style="background-color: #f5f5f5; padding: 20px">
+        <h2>Search Panel</h2>
+        <table>
+            <tbody>
+            <tr>
+                <td>Student ID</td>
+                <td><input type="number" id="searchID"/></td>
+                <td>Title</td>
+                <td>
+                    <select id="searchTitle" style="width: 200px">
+                       <option value="">선택</option>
+                    </select>
+                    @*Here I have made this select box with some static data for make this exaple simpler.
+                            you can fill it from database data*@
+                </td>
+                <td>
+                    <input type="button" value="Search" id="btnSearch" class="btn btn-default"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="tablecontainer">
+    @Html.ActionLink("Add New Student", "Save", "Student",new { enrollId = 0 }, new {@class= "popup btn btn-primary"})
+    <table id="schoolList" class="table table-responsive table-striped">
+        <thead>
         <tr>
-            <td>@data.StudentModelsID</td>
-            <td>@data.LastName</td>
-            <td>@data.FirstMidName</td>
-            <td>@data.EnrollmentDate</td>
+            <td>EnrollmentModelsID</td>
+            <td>StudentModelsID</td>
+            <td>CourseModelsID</td>
+            <td>LastName</td>
+            <td>FirstMidName</td>
+            <td>EnrollmentDate</td>
+            <td>Title</td>
+            <td>Credits</td>
+            <td>Grade</td>
+            <td>Edit</td>
+            <td>Delete</td>
         </tr>
-    }
-    </tbody>
-</table>
+        </thead>
+    </table>
+</div>
+
+@section scripts
+{
+    <script src="~/static/dBTableProcess.js" type="text/javascript"></script> 
+}
