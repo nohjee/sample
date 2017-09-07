@@ -1,7 +1,7 @@
 ﻿@model StudentData.Student
     
 <h2>Save</h2>
-@using (Html.BeginForm("save", "Student", FormMethod.Post, new {id = "popupForm"}))
+@using (Html.BeginForm("Save", "Student", FormMethod.Post, new {id = "popupForm"}))
 {
     if (Model != null && Model.StudentModelsID > 0)
     {

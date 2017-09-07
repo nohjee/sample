@@ -53,7 +53,7 @@
 
     var schoolTable = $('#schoolList').DataTable();
     $('#btnSearch').click(function () {
-        schoolTable.columns(0).search($('#searchID').val().trim());
+        schoolTable.columns(1).search($('#searchID').val().trim());
         schoolTable.columns(6).search($('#searchTitle').val().trim());
         schoolTable.draw();
     });
@@ -100,7 +100,7 @@
                     url: url,
                     data: $('#popupForm').serialize(),
                     success: function (data) {
-                        if (data.status) {
+                        if (data) {
                             $dialog.dialog('close');
                             schoolTable.ajax.reload();
                         }
@@ -115,12 +115,11 @@
     function getTitleList() {
         $.ajax({
             type: 'GET',
-            url: '/Student/GetTitleList',
+            url: '/Student/GetTitles',
             datatype: 'json',
             success: function (data) {
-                var list = JSON.parse(data);
-                for (var i = 0; i < list.length; i++) {
-                    var titleOption = '<option value="' + list[i] + '">' + list[i] + '</option>';
+                for (var i = 0; i < data.data.length; i++) {
+                    var titleOption = '<option value="' + data.data[i] + '">' + data.data[i] + '</option>';
                     $('#searchTitle').append(titleOption);
                 }
             },

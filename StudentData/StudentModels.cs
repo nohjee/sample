@@ -9,8 +9,8 @@ namespace StudentData
     public class StudentModels
     {
         public int StudentModelsID { get; set; }
-        public String LastName { get; set; }
-        public String FirstMidName { get; set; }
+        public string LastName { get; set; }
+        public string FirstMidName { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public virtual ICollection<EnrollmentModels> EnrollmentModelses { get; set; }
     }
@@ -18,7 +18,7 @@ namespace StudentData
     public class CourseModels
     {
         public int CourseModelsID { get; set; }
-        public String Title { get; set; }
+        public string Title { get; set; }
         public int Credits { get; set; }
         public virtual ICollection<EnrollmentModels> EnrollmentModelses { get; set; }
     }
@@ -38,10 +38,10 @@ namespace StudentData
         public int StudentModelsID { get; set; }
         public int CourseModelsID { get; set; }
         public int EnrollmentModelsID { get; set; }
-        public String LastName { get; set; }
-        public String FirstMidName { get; set; }
+        public string LastName { get; set; }
+        public string FirstMidName { get; set; }
         public DateTime EnrollmentDate { get; set; }
-        public String Title { get; set; }
+        public string Title { get; set; }
         public int Credits { get; set; }
         public decimal? Grade { get; set; }
     }
@@ -51,9 +51,9 @@ namespace StudentData
         public int StudentModelsID { get; set; }
         public int CourseModelsID { get; set; }
         public int EnrollmentModelsID { get; set; }
-        public String LastName { get; set; }
-        public String FirstMidName { get; set; }
-        public String Title { get; set; }
+        public string LastName { get; set; }
+        public string FirstMidName { get; set; }
+        public string Title { get; set; }
 
     }
 

@@ -17,11 +17,11 @@ namespace StudentData
     public class SchoolMetadata
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "Plase provide firstmid name")]
-        public String FirstMidName { get; set; }
+        public string FirstMidName { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Plase provide last name")]
-        public String LastName { get; set; }
+        public string LastName { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Plase provide Title")]
-        public String Title { get; set; }
+        public string Title { get; set; }
 
     }
  

@@ -14,7 +14,7 @@ namespace sample.Controllers
 {
     public class StudentController : Controller
     {
-       
+
         // GET: Student
         public ActionResult Index()
         {
@@ -22,82 +22,73 @@ namespace sample.Controllers
         }
 
         [HttpGet]
-        public String GetTitleList()
+        public ActionResult GetTitles()
         {
-            StudentManage studentManage = new StudentManage();
-            var list = studentManage.getTitleList();
-            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            return javaScriptSerializer.Serialize(list);
+            var studentManage = new StudentManage();
+            var titles = studentManage.GetTitleList();
+            return Json(new {data = titles}, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult LoadSchoolList()
+        //public ActionResult LoadSchoolList(string draw, int start, int length, List<DatatableRequest> columns,List<DatatableOrder> order)
+        public ActionResult LoadSchoolList(SchoolListRequest request)
         {
-            var draw = Request.Form.GetValues("draw").FirstOrDefault();
-            var start = Request.Form.GetValues("start").FirstOrDefault();
-            var length = Request.Form.GetValues("length").FirstOrDefault();
+            
 
-            var sortColumn = Request.Form
-                .GetValues("columns[" + Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]")
-                .FirstOrDefault();
-            var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+            var studentManage = new StudentManage();
+            var schoolList = studentManage.GetSchoolList(request);
 
-            var searchId = Request.Form.GetValues("columns[0][search][value]").FirstOrDefault();
-            var searchTitle = Request.Form.GetValues("columns[6][search][value]").FirstOrDefault();
-
-            StudentManage studentManage = new StudentManage();
-            var schoolList = studentManage.GetSchoolList(draw, start, length, 
-                sortColumn, sortColumnDir, searchId, searchTitle);
-        
             return Json(new
-                {
-                    draw = draw,
-                    recordsFiltered = schoolList.totalRecord,
-                    recordTotal = schoolList.totalRecord,
-                    data = schoolList.SchoolLists
-            },
-                JsonRequestBehavior.AllowGet
+            {
+                draw = request.Draw,
+                recordsFiltered = schoolList.TotalRecord,
+                recordTotal = schoolList.TotalRecord,
+                data = schoolList.SchoolLists
+            }, JsonRequestBehavior.AllowGet
             );
-                        
+
         }
 
         [HttpGet]
-        public ActionResult Save(int? enrollId)
+        public ActionResult Save(int enrollId)
         {
-
-            StudentManage studentManage = new StudentManage();
+            var studentManage = new StudentManage();
             var student = studentManage.GetStudent(enrollId);
             return View(student);
-
         }
 
         [HttpPost]
         public ActionResult Save(StudentData.Student student)
         {
-            bool status = false;
+            var status = false;
             if (ModelState.IsValid)
             {
-                StudentManage studentManage = new StudentManage();
-                status = studentManage.SetStudent(student);      
+                var studentManage = new StudentManage();
+                status = studentManage.SetStudent(student);
             }
-            return new JsonResult {Data = new {status = status}};
+            return Json(status);
         }
 
 
         [HttpGet]
-        public ActionResult Delete(int? enrollId)
+        public ActionResult Delete(int enrollId)
         {
-            StudentManage studentManage = new StudentManage();
-            return View(studentManage.GetStudent(enrollId));         
+            var studentManage = new StudentManage();
+            return View(studentManage.GetStudent(enrollId));
         }
 
         [HttpPost]
         public ActionResult Delete(StudentData.Student student)
         {
-            bool status = false; 
-            StudentManage studentManage = new StudentManage();
+            var status = false;
+            var studentManage = new StudentManage();
             status = studentManage.DeleteStudent(student);
-            return new JsonResult { Data = new { status = status } };
+            return Json(status);
         }
     }
+
+   
+
+
+
 }
