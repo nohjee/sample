@@ -104,6 +104,9 @@
                             $dialog.dialog('close');
                             schoolTable.ajax.reload();
                         }
+                    },
+                    error : function(jqxhr) {
+                        $('#error').innerHTML(jqxhr.responseText);
                     }
                 });
 
@@ -118,8 +121,8 @@
             url: '/Student/GetTitles',
             datatype: 'json',
             success: function (data) {
-                for (var i = 0; i < data.data.length; i++) {
-                    var titleOption = '<option value="' + data.data[i] + '">' + data.data[i] + '</option>';
+                for (var i = 0; i < data.Data.length; i++) {
+                    var titleOption = '<option value="' + data.Data[i] + '">' + data.Data[i] + '</option>';
                     $('#searchTitle').append(titleOption);
                 }
             },

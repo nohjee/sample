@@ -25,12 +25,10 @@ namespace sample.Controllers
         public ActionResult GetTitles()
         {
             var studentManage = new StudentManage();
-            var titles = studentManage.GetTitleList();
-            return Json(new {data = titles}, JsonRequestBehavior.AllowGet);
+            return Json(new {Data = studentManage.GetTitleList()}, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        //public ActionResult LoadSchoolList(string draw, int start, int length, List<DatatableRequest> columns,List<DatatableOrder> order)
         public ActionResult LoadSchoolList(SchoolListRequest request)
         {
             
