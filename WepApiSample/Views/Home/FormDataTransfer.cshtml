@@ -1,0 +1,56 @@
+﻿<form name="form1" method="post" enctype="multipart/form-data" action="../api/upload/formdata">
+    <div>
+        <label>Image Caption</label>
+        <input name="caption" type="text" />
+    </div>
+    <div>
+        <label>Image File</label>
+        <input name="image1" type="file" />
+    </div>
+    <div>
+        <input type="submit" value="Submit" />
+    </div>
+</form>
+
+<form name="trip_search" method="post" enctype="multipart/form-data" action="../api/upload/formdata"> 
+    <fieldset> 
+        <legend>Form Controls Example</legend> 
+    </fieldset> 
+ 
+    <label>Trip</label> 
+    <div> 
+        <input type="radio" name="trip" value="round-trip" checked="checked"/> 
+        Round-Trip 
+    </div> 
+    <div> 
+        <input type="radio" name="trip" value="one-way"/> 
+        One-Way 
+    </div> 
+ 
+    <label>Preferences</label> 
+    <div> 
+        <input type="checkbox" name="options" value="nonstop" /> 
+        Only show non-stop flights 
+    </div> 
+    <div> 
+        <input type="checkbox" name="options" value="airports" /> 
+        Compare nearby airports 
+    </div> 
+    <div> 
+        <input type="checkbox" name="options" value="dates" /> 
+        My travel dates are flexible 
+    </div> 
+ 
+    <div> 
+        <label>Seating Preference</label> 
+        <select name="seat"> 
+            <option value="aisle">Aisle</option> 
+            <option value="window">Window</option> 
+            <option value="center">Center</option> 
+            <option value="none">No Preference</option> 
+        </select> 
+    </div> 
+    <div> 
+        <input type="submit" value="Submit" /> 
+    </div> 
+</form> 

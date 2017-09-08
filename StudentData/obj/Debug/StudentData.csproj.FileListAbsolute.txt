@@ -1,0 +1,11 @@
+C:\Users\raymond.lee\Documents\sample\StudentData\bin\Debug\StudentData.dll.config
+C:\Users\raymond.lee\Documents\sample\StudentData\bin\Debug\StudentData.dll
+C:\Users\raymond.lee\Documents\sample\StudentData\bin\Debug\StudentData.pdb
+C:\Users\raymond.lee\Documents\sample\StudentData\bin\Debug\EntityFramework.dll
+C:\Users\raymond.lee\Documents\sample\StudentData\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\raymond.lee\Documents\sample\StudentData\bin\Debug\System.Linq.Dynamic.dll
+C:\Users\raymond.lee\Documents\sample\StudentData\bin\Debug\EntityFramework.xml
+C:\Users\raymond.lee\Documents\sample\StudentData\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\raymond.lee\Documents\sample\StudentData\obj\Debug\StudentData.csprojResolveAssemblyReference.cache
+C:\Users\raymond.lee\Documents\sample\StudentData\obj\Debug\StudentData.dll
+C:\Users\raymond.lee\Documents\sample\StudentData\obj\Debug\StudentData.pdb

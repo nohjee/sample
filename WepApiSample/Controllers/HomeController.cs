@@ -14,5 +14,25 @@ namespace WepApiSample.Controllers
 
             return View();
         }
+
+        public ActionResult AddProduct()
+        {
+            return View();
+        }
+
+        public ActionResult UpdateProduct()
+        {
+            return View();
+        }
+
+        public ActionResult FormDataTransfer()
+        {
+            return View();
+        }
+
+        public ActionResult CookieForm()
+        {
+            return View();
+        }
     }
 }

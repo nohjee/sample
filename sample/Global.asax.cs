@@ -8,6 +8,7 @@ using System.Web.Routing;
 using System.Data.Entity;
 using sample.Models;
 using sample.DAL;
+using StudentData;
 
 namespace sample
 {
